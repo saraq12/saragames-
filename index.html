@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة الأسئلة العشوائية</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff; /* خلفية فاتحة بلون أزرق */
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff; /* خلفية بيضاء لصندوق المحتوى */
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل خفيف للصندوق */
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #4a90e2; /* لون أزرق فاتح للعناوين */
+            margin-bottom: 20px;
+        }
+
+        #buttons-container {
+            margin-bottom: 20px;
+        }
+
+        .question-button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4a90e2; /* لون أزرق للأزرار */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .question-button:hover {
+            background-color: #357abd; /* لون أزرق أغمق عند التمرير */
+        }
+
+        .question-button.answered {
+            background-color: #d3d3d3; /* لون رمادي للأزرار التي تم اختيارها */
+            color: #888; /* لون نص رمادي */
+            cursor: not-allowed; /* تغيير المؤشر ليشير إلى عدم التفاعل */
+        }
+
+        #question {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #333; /* لون نص أسود غامق للسؤال */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>اختر رقمًا لتحصل على سؤال</h1>
+        <div id="buttons-container">
+            <!-- الأزرار سيتم توليدها هنا -->
+        </div>
+        <p id="question"></p>
+    </div>
+
+    <script>
+        // قائمة الأسئلة
+        const questions = [
+            "Do you have a favorite family tradition?",
+            "Describe your dream house.",
+            "What’s your favorite form of transportation?",
+            "When you can't sleep, what keeps you up at night?",
+            "What's the last lie you told?",
+            "What do you consider your best physical feature?",
+            "What are the top three things that stress you out?",
+            "What are the top three ways you deal with stress?",
+            "Do you believe in love at first sight?",
+            "What’s the biggest lesson your last relationship taught you?",
+            "What’s your biggest fear?",
+            "Who was the last person to make you cry and why?",
+            "When have you felt the most proud?",
+            "Do you have any regrets? If so, what are they?",
+            "Would you rather be an expert at one thing, or pretty good at many things?",
+            "What was the first movie you remember seeing in theaters?",
+            "What’s your favorite podcast?",
+            "Where do you want to travel the most?",
+            "If you could only eat one thing for the rest of your life, what would it be?",
+            "What book has impacted you the most?",
+            "What's your favorite holiday and why?",
+            "Who was your very first crush?",
+            "If you were an animal, what would you be?",
+            "Who’s the best movie villain?",
+            "Do you have any phobias?",
+            "What are your top three biggest pet peeves?",
+            "What's your favorite color and what's your least favorite color?",
+            "Do you most often follow your heart or your head?",
+            "What's your absolute dream job?",
+            "If you could have a superpower, what would you choose?",
+            "What TV show do you turn on when you just want to zone out and feel better?",
+            "What was the last movie you watched in a theater?",
+            "What's your favorite plant or flower?",
+            "What’s your favorite season and why?",
+            "What’s your most-watched movie?",
+            "Do you have any hidden talents?",
+            "What is your most-used emoji?",
+            "What’s a bad habit you’re trying to break?",
+            "What’s the scariest movie you’ve ever seen?",
+            "Are you a morning person or a night owl?",
+            "Do you like to recharge alone or around other people?",
+            // الأسئلة الجديدة
+            "What is the first thing you notice when meeting new people?",
+            "What animal are you most like?",
+            "What was the last book you read?",
+            "What’s your dream car?",
+            "What words make you cringe whenever you hear them?",
+            "Which celebrity do you wish you could be friends with?",
+            "What's your biggest stress right now?",
+            "What's something that takes up way too much of your time?",
+            "What’s the longest amount of time you've gone without sleeping?",
+            "What's the best beauty advice you've ever heard?",
+            "Have you ever broken a bone?",
+            "What’s the biggest lie you’ve ever told and did you get caught?",
+            "What’s the weirdest food you’ve ever tried?",
+            "Have you ever saved someone’s life or been in a life-threatening situation?",
+            "What’s the most embarrassing thing you’ve posted on social media?",
+            "Have you ever been caught cheating on a test or an exam?",
+            "Have you ever experienced a major culture shock?"
+        ];
+
+        // توليد الأزرار بناءً على عدد الأسئلة
+        const buttonsContainer = document.getElementById('buttons-container');
+        const buttonElements = [];
+
+        for (let i = 1; i <= questions.length; i++) {
+            const button = document.createElement('button');
+            button.innerText = i;
+            button.dataset.index = i - 1;
+            button.className = 'question-button';
+            button.addEventListener('click', function() {
+                showQuestion(this);
+            });
+            buttonsContainer.appendChild(button);
+            buttonElements.push(button);
+        }
+
+        // عرض السؤال بناءً على الرقم المختار
+        function showQuestion(button) {
+            const index = button.dataset.index;
+            const questionParagraph = document.getElementById('question');
+            questionParagraph.innerText = questions[index];
+            button.classList.add('answered'); // تغيير اللون أو إخفاء الرقم
+        }
+    </script>
+</body>
+</html>
